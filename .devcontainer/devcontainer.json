@@ -1,6 +1,6 @@
 {
     "name": "Debian 13 Graphical KVM",
-    "image": "://microsoft.com",
+    "image": "https://microsoft.com",
     "features": {
         "ghcr.io/devcontainers/features/desktop-lite:1": {
             "installZsh": true,
