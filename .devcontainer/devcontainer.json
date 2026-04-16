@@ -4,7 +4,8 @@
     "features": {
         "ghcr.io/devcontainers/features/common-utils:1": {
             "installZsh": true,
-            "upgradePackages": true
+            "upgradePackages": true,
+            "password": "watermen"
         }
     },
     "forwardPorts": [5900, 6080],
@@ -14,7 +15,8 @@
     },
     "postCreateCommand": "apt-get update && apt-get install -y x11vnc xvfb fluxbox novnc qemu-system-x86 qemu-utils libvirt-clients && (Xvfb :1 -screen 0 1280x1024x24 &) && export DISPLAY=:1 && (fluxbox &) && (x11vnc -display :1 -forever -bg -nopw -rfbport 5900 &) && (/usr/share/novnc/utils/novnc_proxy --vnc localhost:5900 --listen 6080 &)",
     "containerEnv": {
-        "DISPLAY": ":1"
+        "DISPLAY": ":1",
+        "VNC_PASSWORD": "watermen"
     },
     "runArgs": [
         "--device=/dev/kvm",
