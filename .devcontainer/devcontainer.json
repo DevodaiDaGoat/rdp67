@@ -1,31 +1,22 @@
 {
-    "name": "Debian 13 Graphical KVM",
-    "image": "https://microsoft.com",
-    "features": {
-        "ghcr.io/devcontainers/features/desktop-lite:1": {
-            "installZsh": true,
-            "upgradePackages": true,
-            "password": "watermen"
-        }
-    },
-    "forwardPorts": [5900, 6080],
-    "portsAttributes": {
-        "5900": { "label": "VNC Server" },
-        "6080": { "label": "noVNC Web UI" }
-    },
-    "postCreateCommand": "apt-get update && apt-get install -y x11vnc xvfb fluxbox novnc qemu-system-x86 qemu-utils libvirt-clients && (Xvfb :1 -screen 0 1280x1024x24 &) && export DISPLAY=:1 && (fluxbox &) && (x11vnc -display :1 -forever -bg -nopw -rfbport 5900 &) && (/usr/share/novnc/utils/novnc_proxy --vnc localhost:5900 --listen 6080 &)",
-    "containerEnv": {
-        "DISPLAY": ":1",
-        "VNC_PASSWORD": "watermen"
-    },
-    "runArgs": [
-        "--device=/dev/kvm",
-        "--cap-add=NET_ADMIN"
-    ],
-    "customizations": {
-        "vscode": {
-            "extensions": ["ms-vscode.cpptools", "ms-python.python"]
-        }
-    },
-    "remoteUser": "vscode"
+  "name": "Debian KDE (noVNC)",
+  "image": "mcr.microsoft.com/devcontainers/base:debian",
+
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/git-lfs:1": {}
+  },
+
+  "forwardPorts": [6080],
+
+  "portsAttributes": {
+    "6080": {
+      "label": "KDE Desktop (noVNC)",
+      "onAutoForward": "openBrowser"
+    }
+  },
+
+  "postCreateCommand": "apt-get update && apt-get install -y kde-standard kde-terminal xvfb x11vnc novnc websockify dbus-x11 && chmod +x .devcontainer/start.sh",
+
+  "remoteUser": "vscode"
 }
