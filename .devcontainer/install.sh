@@ -4,20 +4,23 @@ set -e
 echo "📦 Installing KDE + VNC stack (stable)..."
 
 export DEBIAN_FRONTEND=noninteractive
-
-sudo apt-get update -y
+sudo apt-get update
 
 sudo apt-get install -y --no-install-recommends \
-  kde-plasma-desktop \
-  plasma-workspace \
-  x11-xserver-utils \
-  xvfb \
-  x11vnc \
-  novnc \
-  websockify \
-  dbus-x11 \
-  autocutsel \
-  git-lfs
+kde-standard \
+kwin-x11 \
+plasma-workspace \
+plasma-desktop \
+konsole \
+xvfb \
+x11vnc \
+novnc \
+websockify \
+dbus-x11 \
+autocutsel \
+x11-xserver-utils \
+fastfetch \
+git-lfs
 
 echo "🧠 Verifying installs..."
 
