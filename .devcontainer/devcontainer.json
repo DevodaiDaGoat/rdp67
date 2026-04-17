@@ -1,24 +1,24 @@
 {
-  "name": "Debian KDE (noVNC)",
+  "name": "ChromeOS-Style Cloud Desktop",
+
   "image": "mcr.microsoft.com/devcontainers/base:debian",
 
   "features": {
-    "ghcr.io/devcontainers/features/git:1": {},
-    "ghcr.io/devcontainers/features/git-lfs:1": {}
+    "ghcr.io/devcontainers/features/git:1": {}
   },
 
   "forwardPorts": [6080],
 
   "portsAttributes": {
     "6080": {
-      "label": "KDE Desktop (noVNC)",
-      "onAutoForward": "openBrowser"
+      "label": "Cloud Desktop (noVNC)",
+      "onAutoForward": "openBrowser",
+      "visibility": "private"
     }
   },
 
-  "postCreateCommand": "apt update && apt install -y kde-standard konsole xvfb x11vnc novnc websockify dbus-x11 autocutsel",
-
-  "postStartCommand": ".devcontainer/start.sh",
+  "postCreateCommand": "bash .devcontainer/install.sh",
+  "postStartCommand": "bash .devcontainer/start.sh",
 
   "remoteUser": "vscode"
 }
