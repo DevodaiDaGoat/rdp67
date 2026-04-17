@@ -18,5 +18,6 @@
 
   "postCreateCommand": "bash .devcontainer/install.sh || true",
 
+  "postStartCommand": "bash .devcontainer/start.sh",
   "remoteUser": "vscode"
 }
