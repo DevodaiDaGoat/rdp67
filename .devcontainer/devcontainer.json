@@ -1,5 +1,5 @@
 {
-  "name": "Windows Cloud OS (Stable)",
+  "name": "KDE Plasma Cloud OS",
 
   "image": "mcr.microsoft.com/devcontainers/base:debian",
 
@@ -9,7 +9,7 @@
 
   "portsAttributes": {
     "6080": {
-      "label": "Desktop (noVNC)",
+      "label": "KDE Desktop",
       "onAutoForward": "openBrowser"
     }
   },
