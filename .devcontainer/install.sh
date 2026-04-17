@@ -3,9 +3,11 @@ set -e
 
 export DEBIAN_FRONTEND=noninteractive
 
-apt-get update
+echo "📦 Installing core system..."
 
-apt-get install -y \
+sudo apt-get update
+
+sudo apt-get install -y \
 xfce4 \
 xfce4-terminal \
 xvfb \
@@ -14,15 +16,23 @@ novnc \
 websockify \
 dbus-x11 \
 autocutsel \
+git-lfs \
 wget \
-gnupg \
-curl
+curl \
+gnupg
 
-# Install Google Chrome
-wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-apt install -y ./google-chrome-stable_current_amd64.deb || apt -f install -y
+# Enable Git LFS
+git lfs install
+
+echo "🌐 Installing Google Chrome..."
+
+wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb || true
+
+sudo apt install -y ./google-chrome-stable_current_amd64.deb || sudo apt-get -f install -y || true
 
 rm -f google-chrome-stable_current_amd64.deb
 
-# Clean desktop clutter
+echo "🧹 Cleaning desktop..."
 rm -rf /home/vscode/Desktop/* || true
+
+echo "✅ Install complete"
