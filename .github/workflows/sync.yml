@@ -10,12 +10,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout source code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Sync repo
+      - name: Push to destination repository
         env:
           DEST_REPO: "devadarshdev22-lgtm/rdp6t7"
           TOKEN: ${{ secrets.REPO_TOKEN }}
