@@ -1,4 +1,4 @@
-name: Sync
+name: Sync to Two Repos
 
 on:
   push:
@@ -6,37 +6,50 @@ on:
       - main
 
 jobs:
-  repo-sync:
+  sync:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout source repo
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Verify token
-        env:
-          TOKEN: ${{ secrets.REPO_TOKEN }}
+      - name: Configure git
         run: |
-          if [ -z "$TOKEN" ]; then
-            echo "❌ Token missing"
-            exit 1
-          fi
-          echo "✅ Token loaded"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Sync repo
+      # =========================
+      # SYNC TO YOUR REPO
+      # =========================
+      - name: Sync to YOUR repo
         env:
-          DEST_REPO: "devadarshdev22-lgtm/rdp6t7"
           TOKEN: ${{ secrets.REPO_TOKEN }}
         run: |
           set -e
 
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          DEST1="devadarshdev22-lgtm/rdp6t7"
 
-          git remote remove destination 2>/dev/null || true
+          git remote remove dest1 2>/dev/null || true
+          git remote add dest1 https://x-access-token:${TOKEN}@github.com/${DEST1}.git
 
-          git remote add destination "https://x-access-token:${TOKEN}@github.com/${DEST_REPO}.git"
+          echo "🚀 Syncing to YOUR repo..."
+          git push dest1 main --force
 
-          git push destination main --force
+      # =========================
+      # SYNC TO BROTHER REPO
+      # =========================
+      - name: Sync to BROTHER repo
+        env:
+          TOKEN: ${{ secrets.REPO_TOKEN }}
+        run: |
+          set -e
+
+          DEST2="BROTHER_USERNAME/BROTHER_REPO"
+
+          git remote remove dest2 2>/dev/null || true
+          git remote add dest2 https://x-access-token:${TOKEN}@github.com/${DEST2}.git
+
+          echo "🚀 Syncing to BROTHER repo..."
+          git push dest2 main --force
