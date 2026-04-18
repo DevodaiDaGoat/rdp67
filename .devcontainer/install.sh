@@ -1,25 +1,25 @@
 #!/bin/bash
-
-echo "📦 Installing XFCE + VNC stack..."
+echo "📦 Installing KDE Plasma + VNC stack..."
 
 sudo apt-get update
-
-# Core desktop + VNC
+# Install KDE Plasma Desktop and essential X11 tools
 sudo apt-get install -y --no-install-recommends \
-xfce4 \
-xfce4-terminal \
-xvfb \
-x11vnc \
-novnc \
-websockify \
-dbus-x11 \
-autocutsel \
-x11-xserver-utils \
-curl \
-gnupg \
-git-lfs
+    kde-plasma-desktop \
+    plasma-desktop \
+    kwin-x11 \
+    dbus-x11 \
+    xvfb \
+    x11vnc \
+    novnc \
+    websockify \
+    x11-xserver-utils \
+    curl \
+    ca-certificates
 
-# ✅ Install fastfetch
+# Fix for KDE rendering in containers
+sudo apt-get install -y libgl1-mesa-dri libglx-mesa0 libegl1-mesa
+
+# Install Fastfetch & Chrome as you had them
 sudo apt-get install -y fastfetch
 
 # ✅ Install Google Chrome

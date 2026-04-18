@@ -19,5 +19,8 @@
   "postCreateCommand": "bash .devcontainer/install.sh || true",
 
   "postStartCommand": "bash .devcontainer/start.sh",
-  "remoteUser": "vscode"
+  "remoteUser": "vscode",
+  "runArgs": [
+    "--shm-size=2gb"
+]
 }
