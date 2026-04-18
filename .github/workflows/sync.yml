@@ -1,4 +1,5 @@
 name: Sync
+
 on:
   push:
     branches:
@@ -7,19 +8,21 @@ on:
 jobs:
   repo-sync:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout source code
-        uses: [actions/checkout](https://github.com)@v4
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: Push to destination repository
         env:
           DEST_REPO: "devadarsh22-lgtm/rdp6t7"
-          TOKEN: ${{ secrets.Repo }}
+          TOKEN: ${{ secrets.REPO_TOKEN }}
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
           git remote add destination "https://${TOKEN}@github.com/${DEST_REPO}.git"
-          # Sync all branches and tags to the destination
+
           git push destination main --force
